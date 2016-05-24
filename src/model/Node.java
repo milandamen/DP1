@@ -2,17 +2,24 @@ package model;
 
 import java.util.ArrayList;
 
+import exceptions.NoInputNodesException;
+import exceptions.NodeCannotHaveMultipleImputsException;
+
 public abstract class Node {
 	public static final boolean STATE_HIGH = true;
 	public static final boolean STATE_LOW = false;
 	
 	protected ArrayList<Node> inputNodes = new ArrayList<Node>();			// Nodes to be used as input
-	protected boolean state = STATE_LOW;									// Default state is LOW
 	protected int propegationDelay = 15;
+	protected String name = "";
 	
-	public abstract boolean getState();
+	public Node(String name) {
+		this.name = name;
+	}
 	
-	public void addInputNode(Node node) {
+	public abstract boolean getState() throws NoInputNodesException;
+	
+	public void addInputNode(Node node) throws NodeCannotHaveMultipleImputsException {
 		if (!inputNodes.contains(node)) {
 			inputNodes.add(node);
 		}
