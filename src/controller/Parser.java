@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -11,13 +12,14 @@ import java.util.regex.Pattern;
 
 import exceptions.NodeAlreadyExistsException;
 import exceptions.NodeNotFoundException;
+import model.NodeInfo;
 
 /**
  * Validates and parses input text file
  */
 public class Parser {
 	
-	public HashMap<String, NodeInfo> getBlueprint(String filePath) throws Exception {
+	public Collection<NodeInfo> getBlueprint(String filePath) throws Exception {
 		return parseLines(readFile(filePath));
 	}
 	
@@ -26,7 +28,7 @@ public class Parser {
 		return Files.readAllLines(Paths.get(filePath).toAbsolutePath(), Charset.forName("UTF-8"));
 	}
 	
-	private HashMap<String, NodeInfo> parseLines(List<String> lines) throws Exception {
+	private Collection<NodeInfo> parseLines(List<String> lines) throws Exception {
 		HashMap<String, NodeInfo> nodes = new HashMap<String, NodeInfo>();
 		
 		boolean namesState = true;
@@ -95,38 +97,9 @@ public class Parser {
 			}
 		}
 		
-		return nodes;
+		return nodes.values();
 	}
 	
-	public class NodeInfo {
-		public String name;
-		public String type;
-		public String[] references;
-		
-		public NodeInfo(String name, String type) {
-			this(name, type, null);
-		}
-		public NodeInfo(String name, String type, String[] references) {
-			this.name = name;
-			this.type = type;
-			this.references = references;
-		}
-		
-		public String toString() {
-			String string = "Node: {name: " + this.name + ", type: " + this.type + ", references: ";
-			
-			if (this.references != null) {
-				string += "[";
-				for (String reference : this.references) {
-					string += reference + ',';
-				}
-				string = string.substring(0, string.length() - 1) + "]";
-			} else {
-				string += "null";
-			}
-			
-			return string + "}";
-		}
-	}
+	
 	
 }

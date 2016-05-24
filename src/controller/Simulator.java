@@ -2,9 +2,7 @@ package controller;
 
 import model.Circuit;
 
-public class Simulator {
-	private Circuit circuit;
-	
+public class Simulator {	
 	public Simulator(){
 	}
 	
