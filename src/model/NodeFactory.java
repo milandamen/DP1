@@ -14,8 +14,7 @@ public class NodeFactory {
             case "PROBE": return new OutputNode(nodeInfo.name);
             case "INPUT_LOW": return new InputNode(nodeInfo.name, Node.STATE_LOW);
             case "INPUT_HIGH": return new InputNode(nodeInfo.name, Node.STATE_HIGH);
-        }
-        
+        }     
         
         // Expetion node does not exist?       
         return null;

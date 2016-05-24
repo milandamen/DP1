@@ -1,9 +1,9 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
+import exceptions.NodeCannotHaveMultipleImputsException;
 import model.Circuit;
 import model.InputNode;
 import model.Node;
@@ -28,26 +28,19 @@ public class Builder {
 		HashMap<String, Node> nodes = createNodes(blueprint, circuit);
 		setRefrences(nodes, blueprint);
 		
-		if (!validCircuit(circuit)){
-		    Logger.getInstance().log("Invalid circuit");
-		}
-
+		circuit.isValid();
+	
 		return circuit;
 	}
 	
-	private boolean validCircuit(Circuit circuit){
-	    for (Node node: circuit.outputNodes){
-	        if (!node.getState())
-	            return false;
-	    }	    	    
-	    return true;
-	}
 	
-	private void setRefrences(HashMap<String, Node> nodes, Collection<NodeInfo> blueprint){
+	
+	private void setRefrences(HashMap<String, Node> nodes, Collection<NodeInfo> blueprint) throws NodeCannotHaveMultipleImputsException{
 	    for (NodeInfo nodeInfo: blueprint){
-	        for (String refName: nodeInfo.references){
-	            nodes.get(nodeInfo.name).addInputNode(nodes.get(refName));
-	        }
+	        if (nodeInfo.references != null)
+    	        for (String refName: nodeInfo.references){
+    	            nodes.get(refName).addInputNode(nodes.get(nodeInfo.name));
+    	        }
 	    }
 	}
 	
@@ -56,11 +49,11 @@ public class Builder {
        for (NodeInfo info : blueprint) {
            Node node = nodeFactory.getNode(info);
            nodes.put(info.name, node);
-           // Add start and endnode to seprate list
+           // Add start- and endnode to seprate list
            if (info.type.equals("PROBE")){
-               circuit.outputNodes.add(node);
+               circuit.outputNodes.add((OutputNode) node);
            } else if (info.type.equals("INPUT_LOW") || info.type.equals("INPUT_HIGH")){
-               circuit.iputNodes.add(node);
+               circuit.iputNodes.add((InputNode) node);
            }
        }    
 
@@ -69,11 +62,11 @@ public class Builder {
 	
 	private void printBluePrint(Collection<NodeInfo> blueprint){
 	    for (NodeInfo info : blueprint) {
-	        Logger.getInstance().log("name: " + info.name + ", type: " + info.type + ", refrenches " + info.references);
+	        info.toString();
 	    }
 	}
 	
 	private Collection<NodeInfo> retrieveBluePrint(String file) throws Exception {
-		return parser.getBlueprint("circuit2.txt");
+		return parser.getBlueprint(file);
 	}
 }

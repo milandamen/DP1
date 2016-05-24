@@ -58,10 +58,10 @@ public class Parser {
 		        	String nodeType = matcher.group(2);
 		        	
 		        	if (nodes.containsKey(nodeName)) {
-		    			System.out.println("Error at blueprint file line: " + lineCount);
+		    			Logger.getInstance().log("Error at blueprint file line: " + lineCount);
 			        	throw new NodeAlreadyExistsException(nodeName);
 			        }
-			        
+
 			        nodes.put(nodeName, new NodeInfo(nodeName, nodeType));
 		        }
 			} else {
@@ -77,7 +77,7 @@ public class Parser {
 		        	
 		        	NodeInfo node = nodes.get(nodeName);
 		        	if (node == null) {
-		        		System.out.println("Error at blueprint file line: " + lineCount);
+		        	    Logger.getInstance().log("Error at blueprint file line: " + lineCount);
 		        		throw new NodeNotFoundException(nodeName);
 		        	}
 		        	
@@ -87,7 +87,7 @@ public class Parser {
 		        	// Check validity of references
 		        	for (String name : nodeReferences) {
 		        		if (nodes.get(name) == null) {
-		        			System.out.println("Error at blueprint file line: " + lineCount);
+		        		    Logger.getInstance().log("Error at blueprint file line: " + lineCount);
 		        			throw new NodeNotFoundException(nodeName);
 		        		}
 		        	}
@@ -99,7 +99,4 @@ public class Parser {
 		
 		return nodes.values();
 	}
-	
-	
-	
 }
