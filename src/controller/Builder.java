@@ -3,6 +3,9 @@ package controller;
 import java.util.Collection;
 import java.util.HashMap;
 
+import controller.validation.CircuitValidationStrategy;
+import controller.validation.CircuitValidator;
+
 import exceptions.NodeCannotHaveMultipleImputsException;
 import model.Circuit;
 import model.InputNode;
@@ -24,12 +27,17 @@ public class Builder {
 	    Collection<NodeInfo> blueprint = retrieveBluePrint(file);
 		printBluePrint(blueprint);
 		
+		Logger.getInstance().log("Builder: Building circuit..");
 		Circuit circuit = new Circuit();
 		HashMap<String, Node> nodes = createNodes(blueprint, circuit);
 		setRefrences(nodes, blueprint);
 		
-		circuit.isValid();
-	
+		CircuitValidator circuitValidator = new CircuitValidator(new CircuitValidationStrategy());
+		if (!circuitValidator.isValid(circuit)) {
+			return null;
+		}
+		
+		Logger.getInstance().log("Builder: Successfully builded circuit.");
 		return circuit;
 	}
 	
@@ -62,7 +70,7 @@ public class Builder {
 	
 	private void printBluePrint(Collection<NodeInfo> blueprint){
 	    for (NodeInfo info : blueprint) {
-	        info.toString();
+	        System.out.println(info.toString());
 	    }
 	}
 	

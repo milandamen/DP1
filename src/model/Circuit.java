@@ -14,19 +14,4 @@ public class Circuit {
         iputNodes = new ArrayList<InputNode>();
     }
     
-    public boolean isValid(){
-        for (Node node: outputNodes){
-            try {
-                node.getState();                   
-            } catch (NoInputNodesException e) {
-                Logger.getInstance().log("Circuit: Invalid circuit! " + e.getMessage());
-                return false;
-            } catch (StackOverflowError e) {
-                Logger.getInstance().log("Circuit: Invalid circuit! Feedback loop." );
-                return false;
-            }
-        }   
-        Logger.getInstance().log("Circuit: Valid circuit.");
-        return true;
-    }
 }
