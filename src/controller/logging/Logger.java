@@ -1,4 +1,4 @@
-package controller;
+package controller.logging;
 
 
 public class Logger {

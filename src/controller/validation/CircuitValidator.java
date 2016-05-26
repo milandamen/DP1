@@ -1,20 +1,27 @@
 package controller.validation;
 
+import java.util.HashMap;
+
 import model.Circuit;
 
 public class CircuitValidator {
-	private IValidationStrategy validationStrategy;
+	private HashMap<String, ICircuitValidationSet> validationSets = new HashMap<String, ICircuitValidationSet>();
+	private ICircuitValidationSet validationSet;
 	
-	public CircuitValidator(IValidationStrategy validationStrategy) {
-		setValidationStrategy(validationStrategy);
+	public CircuitValidator() {
+		// Set names are UPPERCASE
+		validationSets.put("DEFAULT", new CircuitValidationSet());		// Default validation set
+		// ...
+		
+		setValidationSet("DEFAULT");
 	}
 	
-	public void setValidationStrategy(IValidationStrategy validationStrategy) {
-		this.validationStrategy = validationStrategy;
+	public void setValidationSet(String setName) {
+		validationSet = validationSets.get(setName.toUpperCase());
 	}
 	
 	public boolean isValid(Circuit circuit) {
-		return validationStrategy.isValid(circuit);
+		return validationSet.isValid(circuit);
 	}
 	
 }

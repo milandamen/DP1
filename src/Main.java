@@ -9,7 +9,11 @@ public class Main {
 
 		
 		Builder build = new Builder();
-		Circuit circuit = build.buildCirctuit("circuit1.txt");
+		Circuit circuit = build.buildCirctuit("circuit4.txt");
+		
+		if (circuit == null) {
+			return;
+		}
 		
 		circuit.iputNodes.get(0).setState(Node.STATE_LOW);
         circuit.iputNodes.get(1).setState(Node.STATE_LOW);

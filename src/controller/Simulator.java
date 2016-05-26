@@ -1,5 +1,6 @@
 package controller;
 
+import controller.logging.Logger;
 import controller.validation.CircuitValidationStrategy;
 import controller.validation.CircuitValidator;
 import exceptions.NoInputNodesException;
@@ -15,7 +16,7 @@ public class Simulator {
 			return;
 		}
 		
-		CircuitValidator circuitValidator = new CircuitValidator(new CircuitValidationStrategy());
+		CircuitValidator circuitValidator = new CircuitValidator();
 		if (!circuitValidator.isValid(circuit)) {
 			Logger.getInstance().log("The circuit is not valid. Simulation aborted.");
 			return;

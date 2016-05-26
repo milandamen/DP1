@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import controller.logging.Logger;
+
 import exceptions.NodeAlreadyExistsException;
 import exceptions.NodeNotFoundException;
 import model.NodeInfo;

@@ -3,6 +3,7 @@ package controller;
 import java.util.Collection;
 import java.util.HashMap;
 
+import controller.logging.Logger;
 import controller.validation.CircuitValidationStrategy;
 import controller.validation.CircuitValidator;
 
@@ -32,7 +33,7 @@ public class Builder {
 		HashMap<String, Node> nodes = createNodes(blueprint, circuit);
 		setRefrences(nodes, blueprint);
 		
-		CircuitValidator circuitValidator = new CircuitValidator(new CircuitValidationStrategy());
+		CircuitValidator circuitValidator = new CircuitValidator();
 		if (!circuitValidator.isValid(circuit)) {
 			return null;
 		}

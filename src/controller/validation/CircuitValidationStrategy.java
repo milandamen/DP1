@@ -1,6 +1,6 @@
 package controller.validation;
 
-import controller.Logger;
+import controller.logging.Logger;
 import exceptions.NoInputNodesException;
 import model.Circuit;
 import model.Node;
