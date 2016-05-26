@@ -14,6 +14,7 @@ public class Circuit {
         iputNodes = new ArrayList<InputNode>();
     }
     
+    // Strategy pattern gebruiken?
     public boolean isValid(){
         for (Node node: outputNodes){
             try {

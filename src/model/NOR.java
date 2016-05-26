@@ -4,9 +4,10 @@ import exceptions.NoInputNodesException;
 
 public class NOR extends Node {
 
-	public NOR(String name) {
-		super(name);
-	}
+	public NOR() {
+        super();
+        type = this.getClass().getSimpleName();
+    }
 
 	@Override
 	public boolean getState() throws NoInputNodesException {

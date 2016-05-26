@@ -4,10 +4,11 @@ import exceptions.NoInputNodesException;
 
 public class AND extends Node {
 
-	public AND(String name) {
-		super(name);
-	}
-
+	public AND() {
+        super();
+        type = this.getClass().getSimpleName();
+    }
+	
 	@Override
 	public boolean getState() throws NoInputNodesException {
 		if (inputNodes.size() < 2) {

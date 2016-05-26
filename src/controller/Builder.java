@@ -29,16 +29,15 @@ public class Builder {
 		setRefrences(nodes, blueprint);
 		
 		circuit.isValid();
-	
+		
 		return circuit;
-	}
-	
-	
+	}		
 	
 	private void setRefrences(HashMap<String, Node> nodes, Collection<NodeInfo> blueprint) throws NodeCannotHaveMultipleImputsException{
 	    for (NodeInfo nodeInfo: blueprint){
 	        if (nodeInfo.references != null)
     	        for (String refName: nodeInfo.references){
+    	            // Connection input is front to back, our circuit is back to front
     	            nodes.get(refName).addInputNode(nodes.get(nodeInfo.name));
     	        }
 	    }
@@ -49,7 +48,8 @@ public class Builder {
        for (NodeInfo info : blueprint) {
            Node node = nodeFactory.getNode(info);
            nodes.put(info.name, node);
-           // Add start- and endnode to seprate list
+           
+           // Add start- and endnode to separate list
            if (info.type.equals("PROBE")){
                circuit.outputNodes.add((OutputNode) node);
            } else if (info.type.equals("INPUT_LOW") || info.type.equals("INPUT_HIGH")){
@@ -62,7 +62,7 @@ public class Builder {
 	
 	private void printBluePrint(Collection<NodeInfo> blueprint){
 	    for (NodeInfo info : blueprint) {
-	        info.toString();
+	        Logger.getInstance().log(info.toString());
 	    }
 	}
 	

@@ -5,8 +5,9 @@ import exceptions.NodeCannotHaveMultipleImputsException;
 
 public class OutputNode extends Node {
 
-	public OutputNode(String name) {
-		super(name);
+	public OutputNode(String type) {
+	    super();
+	    this.type = type;
 		propegationDelay = 0;
 	}
 

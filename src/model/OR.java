@@ -4,10 +4,11 @@ import exceptions.NoInputNodesException;
 
 public class OR extends Node {
 
-	public OR(String name) {
-		super(name);
-	}
-
+	public OR() {
+        super();
+        type = this.getClass().getSimpleName();
+    }
+	
 	@Override
 	public boolean getState() throws NoInputNodesException {
 		if (inputNodes.size() < 2) {
