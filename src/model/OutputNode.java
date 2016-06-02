@@ -4,12 +4,17 @@ import exceptions.NoInputNodesException;
 import exceptions.NodeCannotHaveMultipleImputsException;
 
 public class OutputNode extends Node {
-
+    private boolean state = STATE_LOW;
+        
 	public OutputNode(String type) {
 	    super();
 	    this.type = type;
 		propegationDelay = 0;
 	}
+	
+	public boolean getStateValue() {
+        return state;
+    }
 
 	@Override
 	public boolean getState() throws NoInputNodesException {
@@ -17,7 +22,8 @@ public class OutputNode extends Node {
 			throw new NoInputNodesException(name);
 		}
 		
-		return inputNodes.get(0).getState();
+		state = inputNodes.get(0).getState();
+		return state;
 	}
 	
 	@Override

@@ -8,8 +8,8 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		Mediator mediator = Mediator.getInstance();
 		
-		mediator.buildCirctuit("circuit1.txt");
-		mediator.simulate();
+		//mediator.buildCirctuit("circuit1.txt");
+		//mediator.simulate();
 		MainFrame mainView = new MainFrame();
 		
 	}

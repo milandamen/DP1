@@ -1,10 +1,13 @@
 package controller;
 
 import model.Circuit;
+
+import java.util.Observable;
+
 import controller.logging.ConsoleLogger;
 import controller.logging.ILogger;
 
-public class Mediator {
+public class Mediator extends Observable {
 	private static Mediator instance = null;
 	
 	private ILogger logger;
@@ -58,6 +61,8 @@ public class Mediator {
 	public void buildCirctuit(String file) {
 		try {
 			circuit = builder.buildCirctuit(file);
+			setChanged();
+			notifyObservers();
 		} catch (Exception e) {
 			log("There was an error building the circuit! " + e.getMessage());
 		}
@@ -65,6 +70,8 @@ public class Mediator {
 	
 	public void simulate() {
 		simulator.simulate(circuit);
+        setChanged();
+        notifyObservers();
 	}
 	
 }
