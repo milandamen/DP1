@@ -3,7 +3,6 @@ package controller;
 import java.util.Collection;
 import java.util.HashMap;
 
-import controller.validation.CircuitValidationStrategy;
 import controller.validation.CircuitValidator;
 
 import exceptions.NodeCannotHaveMultipleImputsException;
@@ -31,7 +30,7 @@ public class Builder implements IBuilder {
 		Circuit circuit = new Circuit();
 		HashMap<String, Node> nodes = createNodes(blueprint, circuit);
 		setRefrences(nodes, blueprint);
-		
+
 		CircuitValidator circuitValidator = new CircuitValidator();
 		if (!circuitValidator.isValid(circuit)) {
 			return null;
@@ -39,14 +38,13 @@ public class Builder implements IBuilder {
 		
 		Mediator.getInstance().log("Builder: Successfully builded circuit.");
 		return circuit;
-	}
-	
-	
+	}		
 	
 	private void setRefrences(HashMap<String, Node> nodes, Collection<NodeInfo> blueprint) throws NodeCannotHaveMultipleImputsException{
 	    for (NodeInfo nodeInfo: blueprint){
 	        if (nodeInfo.references != null)
     	        for (String refName: nodeInfo.references){
+    	            // Connection input is front to back, our circuit is back to front
     	            nodes.get(refName).addInputNode(nodes.get(nodeInfo.name));
     	        }
 	    }
@@ -57,7 +55,8 @@ public class Builder implements IBuilder {
        for (NodeInfo info : blueprint) {
            Node node = nodeFactory.getNode(info);
            nodes.put(info.name, node);
-           // Add start- and endnode to seprate list
+           
+           // Add start- and endnode to separate list
            if (info.type.equals("PROBE")){
                circuit.outputNodes.add((OutputNode) node);
            } else if (info.type.equals("INPUT_LOW") || info.type.equals("INPUT_HIGH")){
@@ -70,7 +69,7 @@ public class Builder implements IBuilder {
 	
 	private void printBluePrint(Collection<NodeInfo> blueprint){
 	    for (NodeInfo info : blueprint) {
-	        System.out.println(info.toString());
+	        Mediator.getInstance().log(info.toString());
 	    }
 	}
 	

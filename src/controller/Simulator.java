@@ -1,6 +1,5 @@
 package controller;
 
-import controller.validation.CircuitValidator;
 import exceptions.NoInputNodesException;
 import model.Circuit;
 import model.Node;
@@ -14,12 +13,6 @@ public class Simulator implements ISimulator {
 			return;
 		}
 		
-		CircuitValidator circuitValidator = new CircuitValidator();
-		if (!circuitValidator.isValid(circuit)) {
-			Mediator.getInstance().log("The circuit is not valid. Simulation aborted.");
-			return;
-		}
-		
 		Mediator.getInstance().log("Simulator: Probe results:\n");
         try {
             for(Node node: circuit.outputNodes){
@@ -29,7 +22,7 @@ public class Simulator implements ISimulator {
             Mediator.getInstance().log("\nSimulator: Simulation completed.");
         } catch (NoInputNodesException e) {
         	Mediator.getInstance().log("Simulator: Invalid circuit! " + e.getMessage());
-        }  catch (StackOverflowError e) {
+        } catch (StackOverflowError e) {
         	Mediator.getInstance().log("Simulator: Invalid circuit! Feedback loop.");
         }
 	}

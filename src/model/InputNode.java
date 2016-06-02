@@ -3,9 +3,10 @@ package model;
 public class InputNode extends Node {
 	private boolean state = STATE_LOW;
 	
-	public InputNode(String name, boolean state) {
-		super(name);
+	public InputNode(String type, boolean state) {
+		super();
 		this.state = state;
+		this.type = type;
 		propegationDelay = 0;
 	}
 

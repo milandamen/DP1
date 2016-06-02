@@ -4,9 +4,10 @@ import exceptions.NoInputNodesException;
 
 public class NAND extends Node {
 
-	public NAND(String name) {
-		super(name);
-	}
+	public NAND() {
+        super();
+        type = this.getClass().getSimpleName();
+    }
 
 	@Override
 	public boolean getState() throws NoInputNodesException {

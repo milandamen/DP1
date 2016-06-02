@@ -10,6 +10,7 @@ public class Mediator {
 	private ILogger logger;
 	private IBuilder builder;
 	private ISimulator simulator;
+	private Circuit circuit;
 	
 	// Defeat instantiation outside this class
 	protected Mediator() {
@@ -46,22 +47,23 @@ public class Mediator {
 		}
 		this.simulator = simulator;
 	}
+	public Circuit getCircuit() {
+		return circuit;
+	}
 	
 	public void log(String string) {
 		logger.log(string);
 	}
 	
-	public Circuit buildCirctuit(String file) {
+	public void buildCirctuit(String file) {
 		try {
-			return builder.buildCirctuit(file);
+			circuit = builder.buildCirctuit(file);
 		} catch (Exception e) {
 			log("There was an error building the circuit! " + e.getMessage());
 		}
-		
-		return null;
 	}
 	
-	public void simulate(Circuit circuit) {
+	public void simulate() {
 		simulator.simulate(circuit);
 	}
 	

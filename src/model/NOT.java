@@ -5,9 +5,10 @@ import exceptions.NodeCannotHaveMultipleImputsException;
 
 public class NOT extends Node {
 
-	public NOT(String name) {
-		super(name);
-	}
+	public NOT() {
+        super();
+        type = this.getClass().getSimpleName();
+    }
 
 	@Override
 	public boolean getState() throws NoInputNodesException {

@@ -4,8 +4,9 @@ import exceptions.NoInputNodesException;
 
 public class XOR extends Node {
 	
-	public XOR(String name) {
-		super(name);
+	public XOR() {
+		super();
+		type = this.getClass().getSimpleName();
 	}
 	
 	@Override
