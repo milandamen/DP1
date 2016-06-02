@@ -1,11 +1,12 @@
 package view;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
+import java.awt.Color;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 public class ControlPanel extends JPanel{
 
+    public ControlPanel(){
+        this.setBackground(Color.yellow);
+    }
 }

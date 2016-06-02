@@ -10,4 +10,11 @@ public class Circuit {
         outputNodes = new ArrayList<OutputNode>();
         iputNodes = new ArrayList<InputNode>();
     }
+    
+    public void setInputNodeValue(boolean state, String name){
+        for (InputNode node: iputNodes){
+            if (node.getName() == name)
+                node.setState(state);
+        }
+    }
 }

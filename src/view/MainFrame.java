@@ -20,10 +20,10 @@ public class MainFrame extends JFrame {
         ioPanel.setBounds(0, 400, 300, 300);
 
         circuitPanel = new CircuitPanel();    
-        circuitPanel.setBounds(200, 0, 500, 400);
+        circuitPanel.setBounds(200, 0, 800, 400);
         
         logPanel = new LogPanel();    
-        logPanel.setBounds(400, 300, 400, 300);
+        logPanel.setBounds(400, 300, 700, 300);
         
         controlPanel = new ControlPanel();    
         controlPanel.setBounds(0, 0, 400, 200);
