@@ -7,7 +7,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 public class IOPanel extends JPanel {
-    final JCheckBox chkApple = new JCheckBox("Apple");
+	private static final long serialVersionUID = 1L;
+	
+	final JCheckBox chkApple = new JCheckBox("Apple");
     final JCheckBox chkMango = new JCheckBox("Mango");
     final JCheckBox chkPeer = new JCheckBox("Peer");
     

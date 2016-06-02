@@ -8,8 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MainFrame extends JFrame {
-    
-    public MainFrame() {
+	private static final long serialVersionUID = 1L;
+
+	public MainFrame() {
         this.setTitle("DP1 Simulator");
       
         GridLayout gridLayout = new GridLayout(2,2);
@@ -20,7 +21,7 @@ public class MainFrame extends JFrame {
         gridPanel.add(new LogPanel(), BorderLayout.EAST);
         this.add(gridPanel);
         
-        this.setMinimumSize(new Dimension(1000, 1000));
+        this.setMinimumSize(new Dimension(1000, 700));
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
