@@ -8,6 +8,9 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.Mediator;
+import controller.logging.GUILogger;
+
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +41,8 @@ public class MainFrame extends JFrame {
         logPanel = new LogPanel();    
         logPanel.setBounds(300, 400, 700, 300);
         logPanel.setBackground(Color.GREEN);
+        
+        Mediator.getInstance().setLogger(new GUILogger(logPanel));
         
         this.add(controlPanel);
         this.add(circuitPanel);
