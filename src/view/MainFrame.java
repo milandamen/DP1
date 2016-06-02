@@ -39,10 +39,10 @@ public class MainFrame extends JFrame {
         logPanel.setBounds(300, 400, 700, 300);
         logPanel.setBackground(Color.GREEN);
         
-        this.add(ioPanel);
-        this.add(circuitPanel);
-        this.add(logPanel);
         this.add(controlPanel);
+        this.add(circuitPanel);
+        this.add(ioPanel);
+        this.add(logPanel);
         
         this.setVisible(true);
     }
