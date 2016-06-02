@@ -1,5 +1,7 @@
 package view;
 
-public class CircuitPanel {
+import javax.swing.JPanel;
+
+public class CircuitPanel extends JPanel {
 
 }

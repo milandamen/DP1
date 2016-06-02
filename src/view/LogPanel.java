@@ -1,5 +1,7 @@
 package view;
 
-public class LogPanel {
+import javax.swing.JPanel;
+
+public class LogPanel extends JPanel{
 
 }
