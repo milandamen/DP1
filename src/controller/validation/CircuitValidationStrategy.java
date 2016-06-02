@@ -1,6 +1,6 @@
 package controller.validation;
 
-import controller.logging.Logger;
+import controller.Mediator;
 import exceptions.NoInputNodesException;
 import model.Circuit;
 import model.Node;
@@ -13,15 +13,15 @@ public class CircuitValidationStrategy implements IValidationStrategy {
             try {
                 node.getState();     
             } catch (NoInputNodesException e) {
-                Logger.getInstance().log("CircuitValidator: Invalid circuit! " + e.getMessage());
+            	Mediator.getInstance().log("CircuitValidator: Invalid circuit! " + e.getMessage());
                 return false;
             } catch (StackOverflowError e) {
-                Logger.getInstance().log("CircuitValidator: Invalid circuit! Feedback loop.");
+            	Mediator.getInstance().log("CircuitValidator: Invalid circuit! Feedback loop.");
                 return false;
             }
         }
 		
-        Logger.getInstance().log("CircuitValidator: Valid circuit.");
+		Mediator.getInstance().log("CircuitValidator: Valid circuit.");
         return true;
 	}
 
