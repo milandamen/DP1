@@ -1,5 +1,6 @@
 package controller;
 
+import view.MainFrame;
 import model.Circuit;
 
 import java.util.Observable;
@@ -14,6 +15,7 @@ public class Mediator extends Observable {
 	private IBuilder builder;
 	private ISimulator simulator;
 	private Circuit circuit;
+	private MainFrame mainView;
 	
 	// Defeat instantiation outside this class
 	protected Mediator() {
@@ -29,6 +31,9 @@ public class Mediator extends Observable {
 		return instance;
 	}
 	
+	public void enableGUI() {
+		mainView = new MainFrame();
+	}
 	public void setLogger(ILogger logger) {
 		if (logger == null) {
 			log("Cannot set logger to null in Mediator!");

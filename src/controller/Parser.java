@@ -24,7 +24,7 @@ public class Parser {
 	}
 	
 	private List<String> readFile(String filePath) throws IOException {
-		System.out.println("Reading file " + Paths.get(filePath).toAbsolutePath());
+		Mediator.getInstance().log("Reading file " + Paths.get(filePath).toAbsolutePath());
 		return Files.readAllLines(Paths.get(filePath).toAbsolutePath(), Charset.forName("UTF-8"));
 	}
 	
