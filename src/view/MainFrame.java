@@ -1,12 +1,9 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import controller.Mediator;
 import controller.logging.GUILogger;
@@ -32,7 +29,7 @@ public class MainFrame extends JFrame {
         
         circuitPanel = new CircuitPanel();    
         circuitPanel.setBounds(200, 0, 800, 400);
-        circuitPanel.setBackground(Color.BLUE);
+        //circuitPanel.setBackground(Color.BLUE);
       
         ioPanel = new IOPanel();
         ioPanel.setBounds(0, 400, 300, 300);

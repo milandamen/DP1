@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -16,8 +15,6 @@ public class ControlPanel extends JPanel{
 	
 	private JButton openButton;
 	private JButton simulateButton;
-	//private JButton openButton;
-	
 
     public ControlPanel(){
         openButton = new JButton("Open");
@@ -25,16 +22,15 @@ public class ControlPanel extends JPanel{
         openButton.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e)
-            {
-                
-//                JFileChooser fileChooser = new JFileChooser();
-//                int returnValue = fileChooser.showOpenDialog(null);
-//                if (returnValue == JFileChooser.APPROVE_OPTION) {
-//                    File selectedFile = fileChooser.getSelectedFile();
-//                    System.out.println(selectedFile.getName());
-//                    Mediator.getInstance().buildCirctuit(selectedFile.getName());
-//                }
-                Mediator.getInstance().buildCirctuit("circuit1.txt");
+            {             
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    System.out.println(selectedFile.getName());
+                    Mediator.getInstance().buildCirctuit(selectedFile.getName());
+                }
+               // Mediator.getInstance().buildCirctuit("circuit3.txt");
             }
         });  
         

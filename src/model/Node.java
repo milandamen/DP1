@@ -58,6 +58,10 @@ public abstract class Node implements Cloneable {
 	    return name;
 	}
 	
+   public String getType(){
+        return type;
+    }
+	
 	// Clone is a shallow copy...
 	@Override
     public Node clone() throws CloneNotSupportedException {

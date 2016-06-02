@@ -15,7 +15,6 @@ public class Mediator extends Observable {
 	private IBuilder builder;
 	private ISimulator simulator;
 	private Circuit circuit;
-	private MainFrame mainView;
 	
 	// Defeat instantiation outside this class
 	protected Mediator() {
@@ -32,8 +31,9 @@ public class Mediator extends Observable {
 	}
 	
 	public void enableGUI() {
-		mainView = new MainFrame();
+		new MainFrame();
 	}
+	
 	public void setLogger(ILogger logger) {
 		if (logger == null) {
 			log("Cannot set logger to null in Mediator!");
@@ -41,6 +41,7 @@ public class Mediator extends Observable {
 		}
 		this.logger = logger;
 	}
+	
 	public void setBuilder(IBuilder builder) {
 		if (builder == null) {
 			log("Cannot set builder to null in Mediator!");
@@ -48,6 +49,7 @@ public class Mediator extends Observable {
 		}
 		this.builder = builder;
 	}
+	
 	public void setSimulator(ISimulator simulator) {
 		if (simulator == null) {
 			log("Cannot set simulator to null in Mediator!");
@@ -55,6 +57,7 @@ public class Mediator extends Observable {
 		}
 		this.simulator = simulator;
 	}
+	
 	public Circuit getCircuit() {
 		return circuit;
 	}

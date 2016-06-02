@@ -61,7 +61,9 @@ public class Builder implements IBuilder {
                circuit.outputNodes.add((OutputNode) node);
            } else if (info.type.equals("INPUT_LOW") || info.type.equals("INPUT_HIGH")){
                circuit.iputNodes.add((InputNode) node);
-           }
+           } else {
+               circuit.nodes.add(node); 
+           }          
        }    
 
        return nodes;

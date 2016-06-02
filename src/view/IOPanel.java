@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -14,9 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import controller.Mediator;
-import exceptions.NoInputNodesException;
 import model.InputNode;
-import model.Node;
 import model.OutputNode;
 
 public class IOPanel extends JPanel implements Observer {
