@@ -1,7 +1,7 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -20,10 +20,11 @@ public class NodePanel extends JPanel{
         this.node = node;
         this.setBackground(color);
 
-        this.setLayout(new BorderLayout());
-        label = new JLabel(node.getType());
+        this.setLayout(new GridBagLayout());
+        label = new JLabel(node.getGUIName());
         label.setForeground(Color.BLUE);
-        this.add(label, BorderLayout.CENTER);
+       
+        this.add(label);
         this.setBorder(BorderFactory.createLineBorder(Color.ORANGE)); 
     }
 }

@@ -58,7 +58,7 @@ public abstract class Node implements Cloneable {
 	    return name;
 	}
 	
-   public String getType(){
+	public String getGUIName(){
         return type;
     }
 	

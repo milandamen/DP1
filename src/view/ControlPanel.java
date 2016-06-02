@@ -27,10 +27,9 @@ public class ControlPanel extends JPanel{
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    System.out.println(selectedFile.getName());
-                    Mediator.getInstance().buildCirctuit(selectedFile.getName());
+                    Mediator.getInstance().buildCirctuit(selectedFile.getPath());
                 }
-               // Mediator.getInstance().buildCirctuit("circuit3.txt");
+                //Mediator.getInstance().buildCirctuit("circuit1.txt");
             }
         });  
         

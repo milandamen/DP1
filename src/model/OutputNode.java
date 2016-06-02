@@ -17,6 +17,11 @@ public class OutputNode extends Node {
     }
 
 	@Override
+    public String getGUIName(){
+        return this.getName() + ": " + state;
+    }    
+	
+	@Override
 	public boolean getState() throws NoInputNodesException {
 		if (inputNodes.size() == 0) {
 			throw new NoInputNodesException(name);
