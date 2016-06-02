@@ -3,7 +3,6 @@ package controller;
 import java.util.Collection;
 import java.util.HashMap;
 
-import controller.logging.Logger;
 import controller.validation.CircuitValidationStrategy;
 import controller.validation.CircuitValidator;
 
@@ -15,7 +14,7 @@ import model.NodeFactory;
 import model.NodeInfo;
 import model.OutputNode;
 
-public class Builder {
+public class Builder implements IBuilder {
 	private Parser parser;
 	private NodeFactory nodeFactory;
 	
@@ -28,7 +27,7 @@ public class Builder {
 	    Collection<NodeInfo> blueprint = retrieveBluePrint(file);
 		printBluePrint(blueprint);
 		
-		Logger.getInstance().log("Builder: Building circuit..");
+		Mediator.getInstance().log("Builder: Building circuit..");
 		Circuit circuit = new Circuit();
 		HashMap<String, Node> nodes = createNodes(blueprint, circuit);
 		setRefrences(nodes, blueprint);
@@ -38,7 +37,7 @@ public class Builder {
 			return null;
 		}
 		
-		Logger.getInstance().log("Builder: Successfully builded circuit.");
+		Mediator.getInstance().log("Builder: Successfully builded circuit.");
 		return circuit;
 	}
 	

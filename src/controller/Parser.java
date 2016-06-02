@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import controller.logging.Logger;
-
 import exceptions.NodeAlreadyExistsException;
 import exceptions.NodeNotFoundException;
 import model.NodeInfo;
@@ -60,7 +58,7 @@ public class Parser {
 		        	String nodeType = matcher.group(2);
 		        	
 		        	if (nodes.containsKey(nodeName)) {
-		    			Logger.getInstance().log("Error at blueprint file line: " + lineCount);
+		        		Mediator.getInstance().log("Error at blueprint file line: " + lineCount);
 			        	throw new NodeAlreadyExistsException(nodeName);
 			        }
 
@@ -79,7 +77,7 @@ public class Parser {
 		        	
 		        	NodeInfo node = nodes.get(nodeName);
 		        	if (node == null) {
-		        	    Logger.getInstance().log("Error at blueprint file line: " + lineCount);
+		        		Mediator.getInstance().log("Error at blueprint file line: " + lineCount);
 		        		throw new NodeNotFoundException(nodeName);
 		        	}
 		        	
@@ -89,7 +87,7 @@ public class Parser {
 		        	// Check validity of references
 		        	for (String name : nodeReferences) {
 		        		if (nodes.get(name) == null) {
-		        		    Logger.getInstance().log("Error at blueprint file line: " + lineCount);
+		        			Mediator.getInstance().log("Error at blueprint file line: " + lineCount);
 		        			throw new NodeNotFoundException(nodeName);
 		        		}
 		        	}
