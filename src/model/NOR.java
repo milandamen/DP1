@@ -15,6 +15,7 @@ public class NOR extends Node {
 			throw new NoInputNodesException(name);
 		}
 		
+		// Get state of all connected nodes and return state of this node
 		for (Node node : inputNodes) {
 			if (node.getState()) {
 				return false;

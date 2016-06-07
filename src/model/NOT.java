@@ -15,10 +15,11 @@ public class NOT extends Node {
 		if (inputNodes.size() == 0) {
 			throw new NoInputNodesException(name);
 		}
-		
+		// Get state of the connected node and return state of this node
 		return !inputNodes.get(0).getState();
 	}
 	
+	// This node can have only one input
 	@Override
 	public void addInputNode(Node node) throws NodeCannotHaveMultipleImputsException {
 		if (inputNodes.size() > 0) {

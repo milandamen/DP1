@@ -23,13 +23,13 @@ public class MainFrame extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        // Add all the panels to the gui
         controlPanel = new ControlPanel();    
         controlPanel.setBounds(0, 0, 200, 400);
         controlPanel.setBackground(Color.MAGENTA);
         
         circuitPanel = new CircuitPanel();    
         circuitPanel.setBounds(200, 0, 800, 400);
-        //circuitPanel.setBackground(Color.BLUE);
       
         ioPanel = new IOPanel();
         ioPanel.setBounds(0, 400, 300, 300);

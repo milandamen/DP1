@@ -25,39 +25,48 @@ public class CircuitPanel extends JPanel implements Observer {
     private final float MIN_MARGIN = NODE_WITDH;
     
 	public CircuitPanel() {
+	    // Register this class as observer in the mediator
 	    Mediator.getInstance().addObserver(this);
 	    nodePanels = new HashMap<String, NodePanel>();
         this.setLayout(null);      	
 	}
 	
+	// On a update from the mediator (trough observer), remove old nodes and place new ones
 	@Override
     public void update(Observable arg0, Object arg1) {
 	    this.removeAll();
 	    
-	    if (Mediator.getInstance().getCircuit() == null) return;
-	    
-	    for (Node node: Mediator.getInstance().getCircuit().nodes){
-	        addNode(node, Color.PINK);
-        }
-	    
-	    for (Node node: Mediator.getInstance().getCircuit().iputNodes){
-	        addNode(node, Color.CYAN);
-        }
-	    
-	    for (Node node: Mediator.getInstance().getCircuit().outputNodes){
-	        addNode(node, Color.GREEN);
-        }
-	    
+	    addNodesToPanel();
+	   
 	    this.revalidate();
 	    this.repaint();
     }
 	
+	private void addNodesToPanel(){
+        if (Mediator.getInstance().getCircuit() == null) return;
+        
+        for (Node node: Mediator.getInstance().getCircuit().nodes){
+            addNode(node, Color.PINK);
+        }
+        
+        for (Node node: Mediator.getInstance().getCircuit().iputNodes){
+            addNode(node, Color.CYAN);
+        }
+        
+        for (Node node: Mediator.getInstance().getCircuit().outputNodes){
+            addNode(node, Color.GREEN);
+        }
+	}
+	
+	// Create and add all nodepanels to the GUI
 	private void addNode(Node node, Color color){
 	    NodePanel nodePanel = new NodePanel(node, color);
 	    
 	    for (int i = 0; i <= MAX_RETRIES; i++){
 	        int xPos = (int) (Math.random() * MAX_WITDH);
 	        int yPos = (int) (Math.random() * MAX_HEIGHT);
+	        
+	        // Make sure the postion is free
 	        if (positionIsFree(xPos, yPos)){
 	            nodePanel.setBounds(xPos, yPos, NODE_WITDH, NODE_HEIGHT);
 	            break;
@@ -72,7 +81,7 @@ public class CircuitPanel extends JPanel implements Observer {
 	    this.add(nodePanel);
 	}
 	
-
+	// Check if there is an other node placed within a certain distant of the next one
     private boolean positionIsFree(int xPos, int yPos){
         for (NodePanel nodePanel : nodePanels.values()) {      
             float distance = (float) Math.sqrt(
@@ -85,6 +94,7 @@ public class CircuitPanel extends JPanel implements Observer {
         return true;
     }
 	
+    // Paint the panels on the field
 	public void paintChildren(Graphics g) {
 	    super.paintChildren(g);
 	    if (nodePanels.size() > 0){
@@ -95,10 +105,11 @@ public class CircuitPanel extends JPanel implements Observer {
                     int xTo = nodePanel.getX() + NODE_WITDH / 2;
                     int yTo = nodePanel.getY() + NODE_HEIGHT / 2;
                     int xFrom = from.getX() + NODE_WITDH / 2;
-                    int yFrom = from.getY() + NODE_HEIGHT / 2;
+                    int yFrom = from.getY() + NODE_HEIGHT / 2;                   
                     int xRel = xTo - xFrom;
                     int yRel = yTo - yFrom;
 
+                    // Check on what sides the panels are connected to each other to draw the arrow
                     if (xTo < xFrom && yTo < yFrom){
                         if (Math.abs(xRel) < Math.abs(yRel)) {
                             drawArrow(g, xFrom, yFrom - NODE_HEIGHT / 2, xTo, yTo + NODE_HEIGHT / 2);
@@ -132,6 +143,7 @@ public class CircuitPanel extends JPanel implements Observer {
 	    }
 	}
 	
+	// Draw an arrow between 2 panels
     private void drawArrow(Graphics g1, int x1, int y1, int x2, int y2) {
         Graphics2D g = (Graphics2D) g1.create();
 

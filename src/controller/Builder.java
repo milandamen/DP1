@@ -23,24 +23,34 @@ public class Builder implements IBuilder {
 	}
 	
 	public Circuit buildCirctuit(String file) throws Exception {
+	    // Get the blueprint
 	    Collection<NodeInfo> blueprint = retrieveBluePrint(file);
 		printBluePrint(blueprint);
 		
 		Mediator.getInstance().log("Builder: Building circuit..");
+		
+		// Create the circuit
 		Circuit circuit = new Circuit();
+		
+		// Create the nodes
 		HashMap<String, Node> nodes = createNodes(blueprint, circuit);
-		setRefrences(nodes, blueprint);
+		
+		/// Set the references between nodes
+		setReferences(nodes, blueprint);
 
+		// Validate circuit
 		CircuitValidator circuitValidator = new CircuitValidator();
 		if (!circuitValidator.isValid(circuit)) {
 			return null;
 		}
 		
 		Mediator.getInstance().log("Builder: Successfully builded circuit.");
+		
+		// Return circuit
 		return circuit;
 	}		
 	
-	private void setRefrences(HashMap<String, Node> nodes, Collection<NodeInfo> blueprint) throws NodeCannotHaveMultipleImputsException{
+	private void setReferences(HashMap<String, Node> nodes, Collection<NodeInfo> blueprint) throws NodeCannotHaveMultipleImputsException{
 	    for (NodeInfo nodeInfo: blueprint){
 	        if (nodeInfo.references != null)
     	        for (String refName: nodeInfo.references){
@@ -56,17 +66,20 @@ public class Builder implements IBuilder {
            Node node = nodeFactory.getNode(info);
            nodes.put(info.name, node);
            
-           // Add start- and endnode to separate list
-           if (info.type.equals("PROBE")){
-               circuit.outputNodes.add((OutputNode) node);
-           } else if (info.type.equals("INPUT_LOW") || info.type.equals("INPUT_HIGH")){
-               circuit.iputNodes.add((InputNode) node);
-           } else {
-               circuit.nodes.add(node); 
-           }          
+           // Add nodes to lists in the circuit
+           addNodeToCircuitList(circuit, info, node);
        }    
-
        return nodes;
+	}
+	
+	private void addNodeToCircuitList(Circuit circuit, NodeInfo info, Node node){
+        if (info.type.equals("PROBE")){
+            circuit.outputNodes.add((OutputNode) node);
+        } else if (info.type.equals("INPUT_LOW") || info.type.equals("INPUT_HIGH")){
+            circuit.iputNodes.add((InputNode) node);
+        } else {
+            circuit.nodes.add(node); 
+        }    
 	}
 	
 	private void printBluePrint(Collection<NodeInfo> blueprint){

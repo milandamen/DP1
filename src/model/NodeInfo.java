@@ -8,12 +8,14 @@ public class NodeInfo {
     public NodeInfo(String name, String type) {
         this(name, type, null);
     }
+    
     public NodeInfo(String name, String type, String[] references) {
         this.name = name;
         this.type = type;
         this.references = references;
     }
     
+    // Convert all the information to a string to print this nodes values
     public String toString() {
         String string = "Node: {name: " + this.name + ", type: " + this.type + ", references: ";
         

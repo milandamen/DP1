@@ -5,23 +5,24 @@ import java.util.HashMap;
 import config.NodeConfig;
 
 public class NodeFactory {
-    private HashMap<String, Node> NODES;
+    private HashMap<String, Node> nodes;
         
+    // On creation ask all the nodes to register themselves
     public NodeFactory(){
-        NODES = new HashMap<String, Node>();
+        nodes = new HashMap<String, Node>();
         for (Node node: NodeConfig.NODES){
-            node.register(NODES);
+            node.register(nodes);
         }
     }
     
     public Node getNode(NodeInfo nodeInfo){      
         try {
-            Node node = (Node) NODES.get(nodeInfo.type).clone();   
+            // Get the node from the HashMap
+            Node node = (Node) nodes.get(nodeInfo.type).clone();   
             node.setName(nodeInfo.name);
             return node;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
-            System.out.println("iets gaat fout");
             return null;
         }
    }

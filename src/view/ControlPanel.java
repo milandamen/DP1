@@ -18,27 +18,31 @@ public class ControlPanel extends JPanel{
 
     public ControlPanel(){
         openButton = new JButton("Open");
-        openButton.setBounds(50, 50, 100, 50);      
-        openButton.addActionListener(new ActionListener() {
-            
+        openButton.setBounds(50, 50, 100, 50);    
+        
+        // Add a listener to the open button to open file dialog to select circuit
+        openButton.addActionListener(new ActionListener() {         
             public void actionPerformed(ActionEvent e)
             {             
                 JFileChooser fileChooser = new JFileChooser();
                 int returnValue = fileChooser.showOpenDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
+                    
+                    // Build the circuit with the file
                     Mediator.getInstance().buildCirctuit(selectedFile.getPath());
                 }
-                //Mediator.getInstance().buildCirctuit("circuit1.txt");
             }
         });  
         
         simulateButton = new JButton("Simulate");
         simulateButton.setBounds(50, 150, 100, 50);
-        simulateButton.addActionListener(new ActionListener() {
-            
+        
+        // Add a listener to simulate the circuit
+        simulateButton.addActionListener(new ActionListener() {          
             public void actionPerformed(ActionEvent e)
             {
+                // Tell the mediator to simulate
                 Mediator.getInstance().simulate();
             }
         }); 

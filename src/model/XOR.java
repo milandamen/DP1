@@ -15,6 +15,7 @@ public class XOR extends Node {
 			throw new NoInputNodesException(name);
 		}
 		
+		// Get state of all connected nodes and return state of this node
 		return getRecursiveXorState(1, inputNodes.get(0).getState());
 	}
 	

@@ -15,6 +15,7 @@ public class Simulator implements ISimulator {
 		
 		Mediator.getInstance().log("Simulator: Probe results:\n");
         try {
+            // Run the simulation by getting states from all nodes
             for(Node node: circuit.outputNodes){
             	Mediator.getInstance().log(node.getName() + " - state " + node.getState() + " - delay " + node.getPropegationDelay());
 		    }

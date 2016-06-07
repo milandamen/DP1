@@ -69,6 +69,8 @@ public class Mediator extends Observable {
 	public void buildCirctuit(String file) {
 		try {
 			circuit = builder.buildCirctuit(file);
+			
+			// Notify observers that circuit is build
 			setChanged();
 			notifyObservers();
 		} catch (Exception e) {
@@ -78,8 +80,9 @@ public class Mediator extends Observable {
 	
 	public void simulate() {
 		simulator.simulate(circuit);
+		
+		// Notify observers that circuit is simulated
         setChanged();
         notifyObservers();
-	}
-	
+	}	
 }

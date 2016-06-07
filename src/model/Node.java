@@ -19,6 +19,7 @@ public abstract class Node implements Cloneable {
 	
 	public abstract boolean getState() throws NoInputNodesException;
 	
+	// Ad input node to the node and check if that is possible
 	public void addInputNode(Node node) throws NodeCannotHaveMultipleImputsException {
 		if (!inputNodes.contains(node)) {
 			inputNodes.add(node);
@@ -40,6 +41,7 @@ public abstract class Node implements Cloneable {
 	public int getPropegationDelay() {
 		int maxPropDelay = 0;
 		
+		// Loop over all connected nodes and update the delay with value of this node
 		for (Node node : inputNodes) {
 			int propDelay = node.getPropegationDelay();
 			if (propDelay > maxPropDelay) {
@@ -62,7 +64,7 @@ public abstract class Node implements Cloneable {
         return type;
     }
 	
-	// Clone is a shallow copy...
+	// Clone this node
 	@Override
     public Node clone() throws CloneNotSupportedException {
         Node node = (Node) super.clone();
@@ -73,6 +75,7 @@ public abstract class Node implements Cloneable {
         return node;
     }
 	
+	// Ask nodes to register themselves
 	public HashMap<String, Node> register(HashMap<String, Node> nodes){
 	    nodes.put(type, this);
 	    return nodes;

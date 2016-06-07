@@ -46,6 +46,7 @@ public class Parser {
 				continue;
 			}
 			
+			// Retrieving the nodes
 			if (namesState) {
 				// Definition of node names and corresponding types
 		        String patternString = "^(\\w+):(?:\\s+)?(\\w+);";
@@ -57,6 +58,7 @@ public class Parser {
 		        	String nodeName = matcher.group(1);
 		        	String nodeType = matcher.group(2);
 		        	
+		        	// Create the node
 		        	if (nodes.containsKey(nodeName)) {
 		        		Mediator.getInstance().log("Error at blueprint file line: " + lineCount);
 			        	throw new NodeAlreadyExistsException(nodeName);
@@ -64,7 +66,9 @@ public class Parser {
 
 			        nodes.put(nodeName, new NodeInfo(nodeName, nodeType));
 		        }
-			} else {
+			} 
+			// Retrieving the node refrenches
+			else {
 				// Definition of node references
 				String patternString = "^(\\w+):\\s+((?:(?:\\w+?),)*(?:\\w+));";
 
@@ -75,6 +79,7 @@ public class Parser {
 		        	String nodeName = matcher.group(1);
 		        	String nodeReferencesString = matcher.group(2);
 		        	
+		        	// Set the reference
 		        	NodeInfo node = nodes.get(nodeName);
 		        	if (node == null) {
 		        		Mediator.getInstance().log("Error at blueprint file line: " + lineCount);
@@ -90,8 +95,7 @@ public class Parser {
 		        			Mediator.getInstance().log("Error at blueprint file line: " + lineCount);
 		        			throw new NodeNotFoundException(nodeName);
 		        		}
-		        	}
-		        	
+		        	}		        	
 		        	node.references = nodeReferences;
 		        }
 			}

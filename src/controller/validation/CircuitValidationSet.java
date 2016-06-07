@@ -15,6 +15,7 @@ public class CircuitValidationSet implements ICircuitValidationSet {
 
 	@Override
 	public boolean isValid(Circuit circuit) {
+	    // Validate circuit with selected strategy
 		for (IValidationStrategy strategy : strategies) {
 			if (!strategy.isValid(circuit)) {
 				return false;

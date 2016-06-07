@@ -23,5 +23,4 @@ public class InputNode extends Node {
 	public void setState(boolean state) {
 		this.state = state;
 	}
-
 }

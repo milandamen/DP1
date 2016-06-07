@@ -20,7 +20,10 @@ public class NodePanel extends JPanel{
         this.node = node;
         this.setBackground(color);
 
+        // Center the label
         this.setLayout(new GridBagLayout());
+        
+        // Get the name from the model and show it
         label = new JLabel(node.getGUIName());
         label.setForeground(Color.BLUE);
        
