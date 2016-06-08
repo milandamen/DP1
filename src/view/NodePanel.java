@@ -30,4 +30,8 @@ public class NodePanel extends JPanel{
         this.add(label);
         this.setBorder(BorderFactory.createLineBorder(Color.ORANGE)); 
     }
+    
+    public void changeLabel(boolean value){
+        label.setText(node.getGUIName() + " " + value);
+    }
 }

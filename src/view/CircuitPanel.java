@@ -5,13 +5,16 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 
 import controller.Mediator;
+import exceptions.NoInputNodesException;
 import model.Node;
+import model.SimulationStep;
 
 public class CircuitPanel extends JPanel implements Observer {
     private static final long serialVersionUID = 1L;
@@ -34,14 +37,38 @@ public class CircuitPanel extends JPanel implements Observer {
 	// On a update from the mediator (trough observer), remove old nodes and place new ones
 	@Override
     public void update(Observable arg0, Object arg1) {
-        this.removeAll(); 
-        nodePanels = new HashMap<String, NodePanel>();
-        
-        addNodesToPanel();
+	    if (arg1 != null){
+	        simulateCircuit(arg1);
+	    } else {
+            this.removeAll(); 
+            nodePanels = new HashMap<String, NodePanel>();
+            
+            addNodesToPanel();
+	    }
         
         this.revalidate();
         this.repaint();
     }
+	
+	private void simulateCircuit(Object argument){
+	    SimulationStep step = (SimulationStep) argument;
+        for (Node node: step.nodes){
+            for (Entry<String, NodePanel> entry : nodePanels.entrySet()) {
+                String key = entry.getKey();
+                NodePanel value = entry.getValue();
+                if (key == node.getName()){
+                    try {
+                        value.changeLabel(node.getStateValue());
+                    } catch (NoInputNodesException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+            }
+            //System.out.println(node);
+        }
+        //System.out.println("----");
+	}
 	
 	private void addNodesToPanel(){
         if (Mediator.getInstance().getCircuit() == null) return;

@@ -1,12 +1,12 @@
 package controller;
 
-import view.MainFrame;
-import model.Circuit;
-
 import java.util.Observable;
 
 import controller.logging.ConsoleLogger;
 import controller.logging.ILogger;
+import model.Circuit;
+import model.SimulationStep;
+import view.MainFrame;
 
 public class Mediator extends Observable {
 	private static Mediator instance = null;
@@ -85,4 +85,13 @@ public class Mediator extends Observable {
         setChanged();
         notifyObservers();
 	}	
+	
+	public void simulateStep(){
+	    if (simulator != null && circuit != null){
+	        SimulationStep step = simulator.simulateStep(circuit);
+            
+            setChanged();
+            notifyObservers(step);
+	    }
+	}
 }

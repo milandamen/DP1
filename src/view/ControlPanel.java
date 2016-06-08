@@ -15,6 +15,7 @@ public class ControlPanel extends JPanel{
 	
 	private JButton openButton;
 	private JButton simulateButton;
+	private JButton nextButton;
 
     public ControlPanel(){
         openButton = new JButton("Open");
@@ -47,8 +48,19 @@ public class ControlPanel extends JPanel{
             }
         }); 
         
+        nextButton = new JButton("Next");
+        nextButton.setBounds(50, 250, 100, 50);
+        nextButton.addActionListener(new ActionListener() {          
+            public void actionPerformed(ActionEvent e)
+            {
+                // Tell the mediator to simulate
+                Mediator.getInstance().simulateStep();
+            }
+        }); 
+        
         this.setLayout(null);
         this.add(openButton);
         this.add(simulateButton);
+        this.add(nextButton);
     }
 }

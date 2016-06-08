@@ -64,6 +64,10 @@ public abstract class Node implements Cloneable {
         return type;
     }
 	
+	public boolean getStateValue() throws NoInputNodesException{
+	    return getState();
+	}
+	
 	// Clone this node
 	@Override
     public Node clone() throws CloneNotSupportedException {
