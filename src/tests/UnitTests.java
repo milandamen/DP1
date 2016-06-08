@@ -1,13 +1,15 @@
 package tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.Collection;
 
 import org.junit.Test;
 
 import controller.Builder;
-import controller.Mediator;
 import controller.Parser;
 import exceptions.NodeAlreadyExistsException;
 import exceptions.NodeNotFoundException;

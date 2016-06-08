@@ -67,7 +67,7 @@ public class Mediator extends Observable {
 	}
 	
 	public void buildCirctuit(String file) {
-		try {
+		try {		    
 			circuit = builder.buildCirctuit(file);
 			
 			// Notify observers that circuit is build

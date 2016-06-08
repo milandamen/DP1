@@ -34,12 +34,13 @@ public class CircuitPanel extends JPanel implements Observer {
 	// On a update from the mediator (trough observer), remove old nodes and place new ones
 	@Override
     public void update(Observable arg0, Object arg1) {
-	    this.removeAll();
-	    
-	    addNodesToPanel();
-	   
-	    this.revalidate();
-	    this.repaint();
+        this.removeAll(); 
+        nodePanels = new HashMap<String, NodePanel>();
+        
+        addNodesToPanel();
+        
+        this.revalidate();
+        this.repaint();
     }
 	
 	private void addNodesToPanel(){
@@ -94,6 +95,11 @@ public class CircuitPanel extends JPanel implements Observer {
         return true;
     }
 	
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
+    
     // Paint the panels on the field
 	public void paintChildren(Graphics g) {
 	    super.paintChildren(g);
