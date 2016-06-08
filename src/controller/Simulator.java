@@ -51,9 +51,7 @@ public class Simulator implements ISimulator {
                 startNodes.add((Node) outputNode);
             }
           
-            simulationSteps.add(new SimulationStep(startNodes));
             ArrayList<Node> nodes = startNodes;
-            ArrayList<Node> inputNodes = new ArrayList<Node>();
             boolean nextStep = true;
             // Create each step
             while(nextStep) {
@@ -64,9 +62,7 @@ public class Simulator implements ISimulator {
                     } else {
                         nextStep = true;
                         for (Node inputNode: node.getInputNodes()){
-                            if (inputNode instanceof InputNode) {
-                                inputNodes.add(inputNode);
-                            } else {
+                            if (!(inputNode instanceof InputNode)) {
                                 nextNodes.add(inputNode);
                             }
                         }
@@ -82,7 +78,6 @@ public class Simulator implements ISimulator {
                 
                 nodes = nextNodes;
             }
-            simulationSteps.add(new SimulationStep(inputNodes));
         } 
         // Return the first value of the stack and simulation step
         return simulationSteps.pop();

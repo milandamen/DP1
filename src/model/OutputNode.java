@@ -15,7 +15,7 @@ public class OutputNode extends Node {
 	public boolean getStateValue() {
         return state;
     }
-
+	
 	@Override
     public String getGUIName(){
         return this.getName() + ": " + state;

@@ -12,7 +12,6 @@ import java.util.Observer;
 import javax.swing.JPanel;
 
 import controller.Mediator;
-import exceptions.NoInputNodesException;
 import model.Node;
 import model.SimulationStep;
 
@@ -57,17 +56,10 @@ public class CircuitPanel extends JPanel implements Observer {
                 String key = entry.getKey();
                 NodePanel value = entry.getValue();
                 if (key == node.getName()){
-                    try {
-                        value.changeLabel(node.getStateValue());
-                    } catch (NoInputNodesException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    value.changeLabel(node.getGUIState());
                 }
             }
-            //System.out.println(node);
         }
-        //System.out.println("----");
 	}
 	
 	private void addNodesToPanel(){

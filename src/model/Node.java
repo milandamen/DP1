@@ -64,8 +64,14 @@ public abstract class Node implements Cloneable {
         return type;
     }
 	
-	public boolean getStateValue() throws NoInputNodesException{
-	    return getState();
+	public String getGUIState() {
+	    try {
+            return getState() + "";
+        } catch (NoInputNodesException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return "";
+        }
 	}
 	
 	// Clone this node
